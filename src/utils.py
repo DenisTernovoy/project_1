@@ -37,7 +37,7 @@ def filter_cards_data(data_cards: list[dict], date: str) -> list[dict]:
 
     filtered_list = []
     try:
-        date_to = dt.datetime.strptime(date, "%d.%m.%Y")
+        date_to = dt.datetime.fromisoformat(date)
     except ValueError:
         raise ValueError("Неверный формат даты")
 
