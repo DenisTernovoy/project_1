@@ -18,4 +18,5 @@ def main_views(timestamp: str = str(dt.datetime.now())) -> str:
     }
 
     result = json.dumps(default_dict, ensure_ascii=False, indent=4)
+
     return result
