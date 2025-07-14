@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, mock_open, patch
 import pytest
 
 from src.utils import (filter_cards_data, get_card_data, get_currency, get_data, get_stocks, get_top_transactions,
-                       greetings)
+                       greetings, write_reports)
 
 
 @pytest.mark.parametrize(
@@ -201,3 +201,31 @@ def test_get_stocks_valid_2(mock_get: Any) -> None:
     mock_json = json.dumps(mock_data)
     with patch("builtins.open", mock_open(read_data=mock_json)):
         assert get_stocks("") == [{}]
+
+
+def test_write_reports() -> None:
+    @write_reports()
+    def func_test(a: int, b: int) -> str:
+        summ = a + b
+        return json.dumps(summ)
+
+    result = func_test(1, 2)
+
+    with open("func_test.json") as file:
+        data = json.load(file)
+
+    assert data == json.loads(result)
+
+
+def test_write_reports_2() -> None:
+    @write_reports("FileName")
+    def func_test(a: int, b: int) -> str:
+        summ = a + b
+        return json.dumps(summ)
+
+    result = func_test(1, 2)
+
+    with open("FileName.json") as file:
+        data = json.load(file)
+
+    assert data == json.loads(result)

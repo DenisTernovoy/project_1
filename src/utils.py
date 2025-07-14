@@ -1,6 +1,8 @@
 import datetime as dt
 import json
 import os
+from collections.abc import Callable
+from typing import Any
 
 import pandas as pd
 import requests
@@ -146,3 +148,26 @@ def get_stocks(file_path: str) -> list[dict]:
         return currency_list
 
     return [{}]
+
+
+def write_reports(file_name: str = "") -> Any:
+    """Функция-декоратор с параметром, принимающая в качестве аргумента имя файла для записи результата
+    работы функции"""
+
+    def decorator(func: Callable) -> Callable:
+        def wrapper(*args: list, **kwargs: dict) -> Any:
+            if file_name == "":
+                name: str = func.__name__
+            else:
+                name = file_name
+
+            result = func(*args, **kwargs)
+
+            with open(f"{name}.json", "w", encoding="utf-8") as file:
+                file.write(result)
+
+            return result
+
+        return wrapper
+
+    return decorator

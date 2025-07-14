@@ -4,7 +4,10 @@ from typing import Optional
 import pandas as pd
 from dateutil.relativedelta import relativedelta
 
+from src.utils import write_reports
 
+
+@write_reports()
 def spending_by_category(transactions: pd.DataFrame, category: str, date: Optional[str] = None) -> str:
     """Функция возвращает траты по заданной категории за последние три месяца (от переданной даты)"""
 
