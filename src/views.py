@@ -18,6 +18,8 @@ logger.setLevel(logging.DEBUG)
 
 
 def main_views(timestamp: str = str(dt.datetime.now())) -> str:
+    """Функция принимает на вход дату и возвращает статистику о банковских операциях пользователя"""
+
     logger.debug("Начало работы функции main_views")
     logger.debug("Попытка прочитать данные из Excel")
     main_data = get_data("../data/operations.xlsx")
