@@ -1,15 +1,8 @@
 import datetime as dt
 import json
 
-from src.utils import (
-    filter_cards_data,
-    get_card_data,
-    get_currency,
-    get_data,
-    get_stocks,
-    get_top_transactions,
-    greetings,
-)
+from src.utils import (filter_cards_data, get_card_data, get_currency, get_data, get_stocks, get_top_transactions,
+                       greetings)
 
 
 def main_views(timestamp: str = str(dt.datetime.now())) -> str:
